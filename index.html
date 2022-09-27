@@ -6,7 +6,7 @@
         content="">
   <meta name="keywords" content="Robotics, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Neural Fields for Robotic Object Manipulation from a Single Image</title>
+  <title>Parallel Inversion of Neural Radiance Fields for Robust Pose Estimation</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
@@ -36,13 +36,13 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Neural Fields for Robotic Object Manipulation from a Single Image</h1>
+          <h1 class="title is-1 publication-title">Parallel Inversion of Neural Radiance Fields for Robust Pose Estimation</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="">Valts Blukis</a><sup>1</sup>,
+              <a href="">Yunzhi Lin</a><sup>1,2</sup>,
             </span>
             <span class="author-block">
-              <a href="">Taeyeop Lee</a><sup>2</sup>,
+              <a href="">Thomas Müller</a><sup>1</sup>,
             </span>
             <span class="author-block">
               <a href="">Jonathan Tremblay</a><sup>1</sup>,
@@ -51,35 +51,34 @@
               <a href="">Bowen Wen</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="">In So Kweon</a><sup>2</sup>,
+              <a href="">Stephen Tyree</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="">Kuk-Jin Yoon</a><sup>2</sup>,
+              <a href="">Alex Evans</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="">Dieter Fox</a><sup>1</sup>,
+              <a href="">Patricio A. Vela</a><sup>2</sup>,
             </span>
             <span class="author-block">
               <a href="">Stan Birchfield</a><sup>1</sup>
             </span>
-
           </div>
 
           <div class="is-size-5 publication-authors">
             <span class="author-block"><sup>1</sup>NVIDIA,</span>
-            <span class="author-block"><sup>2</sup>KAIST</span>
+            <span class="author-block"><sup>2</sup>Georgia Tech.</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <!-- PDF Link. -->
               <span class="link-block">
-                <a href=""
+                <a href="https://www.dropbox.com/s/i07q1bnxznrtd03/iNeRF_Parallel_Latex_ICRA2023.pdf?dl=0"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper (soon)</span>
+                  <span>Paper</span>
                 </a>
               </span>
               <span class="link-block">
@@ -133,12 +132,12 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="https://i.imgur.com/ExU4ELy.mp4"
+        <source src="https://i.imgur.com/sQfrE9a.mp4"
                 type="video/mp4">
       </video>
-      <h2 class="subtitle has-text-centered">
+      <!-- <h2 class="subtitle has-text-centered">
         Our method learns to represent an object from a single view (left) and outputs grasping points (less likely successful to most - red to green), and multi-view (middle). Ground truth reconstruction on last column.
-      </h2>
+      </h2> -->
     </div>
   </div>
 </section>
@@ -210,9 +209,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            We present a unified and compact representation for object rendering, 3D reconstruction, and grasp pose prediction that can be inferred from a single image within a few seconds. 
-            Our insight is that we can learn a compact shape representation and extract meaningful additional information from it, such as grasping poses. We believe this to be the first work to retrieve grasping poses directly from a NeRF-based representation using a single viewpoint (RGB-only), rather than going through a secondary network and/or representation. 
-            When compared to prior art, our method is two to three orders of magnitude smaller while achieving comparable performance at view reconstruction and grasping. Accompanying our method, we also propose a new dataset of rendered shoes for training a sim-2-real NeRF method with grasping poses for different widths of grippers.
+            We present a parallelized optimization method based on fast Neural Radiance Fields (NeRF) for estimating 6-DoF target poses. Given a single observed RGB image of the target, we can predict the translation and rotation of the camera by minimizing the residual between pixels rendered from a fastNeRF model and pixels in the observed image. We integrate a momentum-based camera extrinsic optimization procedure intoInstant Neural Graphics Primitives, a recent exceptionally fastNeRF implementation. By introducing parallel Monte Carlo sampling into the pose estimation task, our method over comes local minima and improves efficiency in a more extensive search space. We also show the importance of adopting a more robust pixel-based loss function to reduce error. Experiments demonstrate that our method can achieve improved generalization and robustness on both synthetic and real-world benchmarks.
           </p>
         </div>
       </div>
@@ -220,11 +217,12 @@
     <!--/ Abstract. -->
 
     <!-- Paper video. -->
+    <!-- https://youtu.be/QNsiPk6zqmU -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
         <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/sHVMp8XdUN4?rel=0&amp;showinfo=0"
+          <iframe src="https://www.youtube.com/embed/QNsiPk6zqmU?rel=0&amp;showinfo=0"
                   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>         
           </iframe>
         </div>
@@ -234,7 +232,27 @@
   </div>
 </section>
 
-
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="https://i.imgur.com/J6IfO52.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="https://i.imgur.com/9ytDWBl.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- https://i.imgur.com/J6IfO52.mp4 -->
 
 <!-- <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
